@@ -1,5 +1,6 @@
 package com.aulas.rest.services;
 
+import java.security.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +26,16 @@ public class EstacionarService {
 	   }
 	   
 	 
-	 public Estacionar save (Estacionar estacionar) {
-		 localFeignClient.alterarStatusvaga(estacionar.getIdVaga(), true);
-		 return repository.save(estacionar);
+	 public String save ( int idVaga, int idUsuario) {
+		 //localFeignClient.alterarStatusvaga(.getIdVaga(), true);
+		localFeignClient.alterarStatusvaga(idVaga,true);
+		
+		Estacionar estacionar = new Estacionar();
+		 estacionar.setDataHoraChegada();
+		 estacionar.setIdUsuario(idUsuario);
+		 estacionar.setIdVaga(idVaga);
+		 repository.save(estacionar);
+		 return  "Usuario estacionado com sucesso";
 	 
 	 
 	 

@@ -23,17 +23,24 @@ public class VagasController {
 	@Autowired
 	VagasService service;
 
+	
 	@GetMapping
 	public ResponseEntity<List<Vagas>> pegarVagas() {
 		return ResponseEntity.ok(service.listTodas());
 	}
 
-	@GetMapping("/{idvagas}")
-	public ResponseEntity<Vagas> pegarPorId(@PathVariable("idvagas") int idvagas) {
-		return ResponseEntity.ok(service.pegarPorId(idvagas));
+	@GetMapping("/pesquisar/{idvaga}")
+	public ResponseEntity<Vagas> pegarPorId(@PathVariable("idvaga") int idvaga) {
+		return ResponseEntity.ok(service.pegarPorId(idvaga));
+	}
+	
+
+	@GetMapping("{tipoVaga}")
+	public ResponseEntity<Integer> sugerirVaga(@PathVariable("tipoVaga") String tipoVaga) {
+		return ResponseEntity.ok(service.sugerirVaga(tipoVaga));
 	}
 
-	@PostMapping("{quantidade}")
+	@PostMapping("/criar/{quantidade}")
 	public ResponseEntity<String> salvar(@PathVariable ("quantidade") int quantidade) {
 		return ResponseEntity.ok(service.salvar(quantidade));
 	}
@@ -44,9 +51,9 @@ public class VagasController {
 	return ResponseEntity.status(HttpStatus.OK).build();
 	}
 
-	@PutMapping("/{idvagas}")
-	public ResponseEntity<Vagas> alterar(@PathVariable("idvagas") int idvagas, @RequestBody Vagas vagas) {
-		return ResponseEntity.ok(service.alterar(idvagas, vagas));
+	@PutMapping("/{idvaga}")
+	public ResponseEntity<Vagas> alterar(@PathVariable("idvaga") int idvaga, @RequestBody Vagas vagas) {
+		return ResponseEntity.ok(service.alterar(idvaga, vagas));
 	}
 
 	@DeleteMapping("/{idvagas}")

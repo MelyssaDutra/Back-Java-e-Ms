@@ -28,9 +28,9 @@ public class EstacionarController {
 		return ResponseEntity.status(HttpStatus.OK).body(service.getAll());
 	}
 	
-	@PostMapping("/estacionar")
-	public ResponseEntity<Estacionar> save(@RequestBody Estacionar estacionar){
-		return ResponseEntity.status(HttpStatus.CREATED).body(service.save(estacionar));
+	@PostMapping("/estacionar/{idVaga}/{idUsuario}")
+	public ResponseEntity<String> save(@PathVariable("idVaga") int idVaga, @PathVariable("idUsuario") int idUsuario){
+    return ResponseEntity.status(HttpStatus.CREATED).body(service.save(idVaga, idUsuario));
 	}
 	
 	@DeleteMapping("/estacionar/{idestacionar}")

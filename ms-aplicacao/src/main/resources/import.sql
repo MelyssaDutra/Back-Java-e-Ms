@@ -1,0 +1,2 @@
+insert into usuario(datanascimento,email, gestante, nome, pcd, perfil, senha)values('1999-09-03', 'ariel@gmail.com', 'N', 'Ariel',  'N', 'ADM', '123');
+insert into usuario(datanascimento,email, gestante, nome, pcd, perfil, senha)values('1999-09-03', 'ursula@gmail.com', 'N', 'Ursula',  'N', 'ADM', '123');

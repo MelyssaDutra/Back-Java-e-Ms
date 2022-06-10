@@ -3,13 +3,14 @@ package com.aulas.rest.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.aulas.rest.dto.UsuarioDTO;
 import com.aulas.rest.entities.Usuario;
+import com.aulas.rest.feignclient.FeignClientEstacionar;
+import com.aulas.rest.feignclient.FeignClientVagas;
 import com.aulas.rest.repository.UsuarioRepository;
 //import com.aulas.rest.servicos.excecoes.RecursoNaoEncontrado;
 
@@ -19,6 +20,22 @@ import com.aulas.rest.repository.UsuarioRepository;
 public class UsuarioService {
 	@Autowired
 	UsuarioRepository repo;
+	
+	@Autowired
+	FeignClientVagas feignClientVagas;
+	
+	@Autowired
+	FeignClientEstacionar feignClientEstacionar;
+	
+	public int estacionar(int idUsuario, String tipoVaga) {
+		int idVaga = feignClientVagas.sugerirVaga(tipoVaga).getBody();
+		feignClientEstacionar.save(idVaga, idUsuario);
+		
+		return idVaga;
+		
+		
+	}
+	
 	
 	public List<UsuarioDTO> listTodos(){
 		List<UsuarioDTO> lista = new ArrayList<>();
@@ -62,6 +79,8 @@ public class UsuarioService {
 	public void deletar(int idusuario) {
 		repo.deleteById(idusuario);
 	}
+	
+	
 	
 	
 }

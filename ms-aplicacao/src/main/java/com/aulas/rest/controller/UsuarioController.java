@@ -37,6 +37,12 @@ public class UsuarioController {
 		return ResponseEntity.ok(service.pegarPorId(idusuario));
 	}
 
+	
+	@GetMapping("/{idusuario}/{tipoVaga}")
+	public ResponseEntity<Integer> SugerirVaga(@PathVariable("idusuario") int idusuario, @PathVariable("tipoVaga") String tipoVaga) {
+		return ResponseEntity.ok(service.estacionar(idusuario, tipoVaga));
+	}
+	
 	/*@PostMapping("/login")
 	public ResponseEntity<UsuarioDTO> salvarLogin(@RequestBody Usuario usuario) {
 		return ResponseEntity.ok(service.salvar(usuario));
